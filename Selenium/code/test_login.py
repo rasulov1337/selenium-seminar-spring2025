@@ -28,14 +28,14 @@ def cookies(credentials, config):
 
 
 class LoginPage(BasePage):
-    url = 'https://park.vk.company/'
+    url = 'https://education.vk.company'
 
     def login(self, user, password):
         return MainPage(self.driver)
 
 
 class MainPage(BasePage):
-    url = 'https://park.vk.company/feed/'
+    url = 'https://education.vk.company/feed/'
 
 
 class TestLogin(BaseCase):

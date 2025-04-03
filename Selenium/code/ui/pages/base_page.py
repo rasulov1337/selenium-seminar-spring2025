@@ -17,7 +17,7 @@ class BasePage(object):
     locators_main = basic_locators.MainPageLocators()
     url = 'https://www.python.org/'
 
-    def is_opened(self, timeout=15):
+    def is_opened(self, timeout=4):
         started = time.time()
         while time.time() - started < timeout:
             if self.driver.current_url == self.url:
@@ -26,7 +26,8 @@ class BasePage(object):
 
     def __init__(self, driver):
         self.driver = driver
-        self.is_opened()
+        self.driver.get(self.url)  # Fucking open base url immediately
+        # self.is_opened()
 
     def wait(self, timeout=None):
         if timeout is None:

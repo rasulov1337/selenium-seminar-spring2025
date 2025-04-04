@@ -26,6 +26,6 @@ class LoginPage(BasePage):
         self.click(LoginPageLocators.CONTINUE_WITH_PASSWORD_BUTTON)
         self.find(LoginPageLocators.EMAIL_INPUT).send_keys(email)
         self.find(LoginPageLocators.PASSWORD_INPUT).send_keys(password)
-        self.find(LoginPageLocators.SEND_CREDENTIALS_BUTTON).click()
+        self.click(LoginPageLocators.SEND_CREDENTIALS_BUTTON)
 
         return MainPage(self.driver)

@@ -10,6 +10,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 import os
 from ui.locators.main_locators import MainPageLocators
+from ui.locators.search_locators import SearchPageLocators
 
 load_dotenv()
 
@@ -45,6 +46,7 @@ class TestLogin(BaseCase):
         self.login_page.login(os.getenv('EMAIL'), os.getenv('PASSWORD'))
 
         # Wait for redirect!
+        # TODO: FIX THIS
         # WebDriverWait(self.driver, 10).until(EC.url_changes(self.main_page.url))
         WebDriverWait(self.driver, 10).until(EC.title_is('Моё обучение'))
 
@@ -55,7 +57,7 @@ class TestLK(BaseCase):
         search_query = os.getenv('SEARCH_QUERY')
         assert search_query, 'Search query is empty!'
         self.main_page.search(search_query)
-        assert self.main_page.find((By.XPATH, '//h2[@class="page-header"]')).text == 'Результаты поиска'
+        assert self.main_page.find(SearchPageLocators.PAGE_HEADER).text == 'Результаты поиска'
 
 
     # def test_lk2(self):

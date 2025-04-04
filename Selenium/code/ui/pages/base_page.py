@@ -1,4 +1,5 @@
 import time
+from selenium.common.exceptions import TimeoutException
 
 import allure
 from selenium.webdriver.remote.webelement import WebElement
@@ -26,7 +27,11 @@ class BasePage(object):
 
     def __init__(self, driver):
         self.driver = driver
-        self.driver.get(self.url)  # Fucking open base url immediately
+        self.driver.set_page_load_timeout(5)
+        try:
+            self.driver.get(self.url)  # Fucking open base url immediately
+        except TimeoutException:
+            driver.execute_script("window.stop();")
         # self.is_opened()
 
     def wait(self, timeout=None):

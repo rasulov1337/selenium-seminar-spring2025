@@ -7,6 +7,7 @@ from ui.pages.events_page import EventsPage
 
 
 class MainPage(BasePage):
+    url = 'https://education.vk.company/feed/'
 
     locators = basic_locators.MainPageLocators()
 

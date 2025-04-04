@@ -2,11 +2,14 @@ import pytest
 from _pytest.fixtures import FixtureRequest
 from dotenv import load_dotenv
 
+from selenium.webdriver.common.by import By
 from ui.pages.login_page import LoginPage
 from ui.pages.main_page import MainPage
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 import os
+from ui.locators.main_locators import MainPageLocators
 
 load_dotenv()
 
@@ -40,13 +43,20 @@ class TestLogin(BaseCase):
 
     def test_login(self, credentials):
         self.login_page.login(os.getenv('EMAIL'), os.getenv('PASSWORD'))
-        assert self.driver.title == 'Лента - VK Education'
 
-# class TestLK(BaseCase):
-#     authorize = True
+        # Wait for redirect!
+        # WebDriverWait(self.driver, 10).until(EC.url_changes(self.main_page.url))
+        WebDriverWait(self.driver, 10).until(EC.title_is('Моё обучение'))
 
-#     def test_lk1(self):
-#         pass
+class TestLK(BaseCase):
+    authorize = True
 
-#     def test_lk2(self):
-#         pass
+    def test_search_classmate(self):
+        search_query = os.getenv('SEARCH_QUERY')
+        assert search_query, 'Search query is empty!'
+        self.main_page.search(search_query)
+        assert self.main_page.find((By.XPATH, '//h2[@class="page-header"]')).text == 'Результаты поиска'
+
+
+    # def test_lk2(self):
+    #     pass

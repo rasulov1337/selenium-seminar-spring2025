@@ -28,4 +28,4 @@ class LoginPage(BasePage):
         self.find(LoginPageLocators.PASSWORD_INPUT).send_keys(password)
         self.click(LoginPageLocators.SEND_CREDENTIALS_BUTTON)
 
-        return MainPage(self.driver)
+        # return MainPage(self.driver)

@@ -7,6 +7,10 @@ def pytest_addoption(parser):
     parser.addoption('--debug_log', action='store_true')
     parser.addoption('--selenoid', action='store_true')
     parser.addoption('--vnc', action='store_true')
+    # Подрубаем кэш, чтобы все не грузилось вечно
+    parser.addoption("--disk-cache-dir=./cache")  # Включить кеш
+    parser.addoption("--disk-cache-size=1048576")  # Размер кеша (1 МБ)
+
 
 
 @pytest.fixture(scope='session')

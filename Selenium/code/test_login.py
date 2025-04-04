@@ -42,20 +42,19 @@ class LoginPage(BasePage):
         # self.driver.get(self.url)
         self.is_opened()
 
-    def login(self, user, password):
+    def login(self, email, password):
         login_button = self.find((By.XPATH, "//a[text()='вход / регистрация']"))
         login_button.click()
 
         self.find((By.XPATH, "//button[text()='Продолжить с помощью почты и пароля']")).click()
 
-        email = self.find((By.ID, 'email'))
-        email.send_keys(os.getenv('EMAIL'))
+        email_input = self.find((By.ID, 'email'))
+        email_input.send_keys(email)
 
-        password = self.find((By.ID, 'password'))
-        password.send_keys(os.getenv('PASSWORD'))
+        password_input = self.find((By.ID, 'password'))
+        password_input.send_keys(password)
 
         self.find((By.XPATH, "//button[text()='Войти с паролем']")).click()
-
 
         return MainPage(self.driver)
 
@@ -68,7 +67,7 @@ class TestLogin(BaseCase):
     authorize = True
 
     def test_login(self, credentials):
-        self.login_page.login('n', 'ig')
+        self.login_page.login(os.getenv('EMAIL'), os.getenv('PASSWORD'))
 
 # class TestLK(BaseCase):
 

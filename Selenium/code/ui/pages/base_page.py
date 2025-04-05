@@ -30,10 +30,9 @@ class BasePage(object):
         self.driver = driver
         self.driver.set_page_load_timeout(5)
         try:
-            self.driver.get(self.url)  # Fucking open base url immediately
+            self.driver.get(self.url)
         except TimeoutException:
             driver.execute_script("window.stop();")
-        # self.is_opened()
 
     def wait(self, timeout=None):
         if timeout is None:

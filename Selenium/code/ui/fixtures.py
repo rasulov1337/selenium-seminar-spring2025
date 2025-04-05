@@ -33,7 +33,6 @@ def driver(config):
         driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
     else:
         raise RuntimeError(f'Unsupported browser: "{browser}"')
-    # driver.get(url)
     driver.maximize_window()
     yield driver
     driver.quit()

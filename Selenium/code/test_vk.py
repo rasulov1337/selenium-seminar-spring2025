@@ -28,10 +28,6 @@ class BaseCase:
             self.login_page.login(os.getenv('EMAIL'), os.getenv('PASSWORD'))
 
 
-@pytest.fixture(scope='session')
-def cookies(credentials, config):
-        pass
-
 class TestLogin(BaseCase):
     authorize = False
 
@@ -43,14 +39,16 @@ class TestLogin(BaseCase):
 class TestLK(BaseCase):
     authorize = True
 
+    SEARCH_QUERY = 'Арсен'
+    SCHEDULE_SELECT_DAY_OF_WEEK = 'ЧТ'
+
     def test_search_classmate(self):
-        search_query = os.getenv('SEARCH_QUERY')
-        assert search_query, 'Search query is empty!'
-        self.main_page.search(search_query)
+        assert self.SEARCH_QUERY, 'Search query is empty!'
+        self.main_page.search(self.SEARCH_QUERY)
         assert self.main_page.find(SearchPageLocators.PAGE_HEADER).text == 'Результаты поиска'
 
     def test_info_about_current_seminar(self):
-        self.main_page.open_info_about_lesson_at_day_of_week(os.getenv('SCHEDULE_SELECT_DAY_OF_WEEK'))
-        WebDriverWait(self.driver, 10).until(lambda d: len(d.window_handles) > 1)  # Wait for new tab to open
+        self.main_page.open_info_about_lesson_at_day_of_week(self.SCHEDULE_SELECT_DAY_OF_WEEK)
+        self.main_page.wait(10).until(lambda d: len(d.window_handles) > 1)  # Wait for new tab to open
         self.driver.switch_to.window(self.driver.window_handles[1])
         assert "Дата проведения" in self.driver.find_element(*BasePageLocators.BODY).text, 'Дата проведения not found on the page'

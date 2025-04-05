@@ -1,5 +1,6 @@
 from ui.pages.base_page import BasePage
 from ui.locators.login_locators import LoginPageLocators
+from selenium.common.exceptions import ElementClickInterceptedException
 
 class LoginPage(BasePage):
     url = 'https://education.vk.company/'
@@ -15,7 +16,7 @@ class LoginPage(BasePage):
     def login(self, email, password):
         try:
             self.click(LoginPageLocators.LOGIN_BUTTON)
-        except:
+        except ElementClickInterceptedException:  # Some kind of bug. The only way to fix that is use this construction
             pass
 
         self.click(self.locators.CONTINUE_WITH_PASSWORD_BUTTON)

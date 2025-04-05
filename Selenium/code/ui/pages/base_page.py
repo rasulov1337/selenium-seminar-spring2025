@@ -42,18 +42,6 @@ class BasePage(object):
     def find(self, locator, timeout=None):
         return self.wait(timeout).until(EC.presence_of_element_located(locator))
 
-    @allure.step('Search')
-    def search(self, query):
-        elem = self.find(self.locators.QUERY_LOCATOR_ID)
-        elem.send_keys(query)
-        go_button = self.find(self.locators.GO_BUTTON_LOCATOR)
-        go_button.click()
-        self.my_assert()
-
-    @allure.step("Step 1")
-    def my_assert(self):
-        assert 1 == 1
-
 
     @allure.step('Click')
     def click(self, locator, timeout=None) -> WebElement:

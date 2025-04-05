@@ -6,8 +6,6 @@
 ```env
 EMAIL=x@x.xxx
 PASSWORD=xxxx
-SEARCH_QUERY=Хабиб
-SCHEDULE_SELECT_DAY_OF_WEEK=Чт
 ```
 
 

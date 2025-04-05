@@ -5,6 +5,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from ui.pages.base_page import BasePage
 from ui.pages.main_page import MainPage
+import os
 
 
 @pytest.fixture()
@@ -66,3 +67,11 @@ def base_page(driver):
 @pytest.fixture
 def main_page(driver):
     return MainPage(driver=driver)
+
+
+@pytest.fixture(scope='session')
+def credentials():
+    email = os.getenv('EMAIL')
+    password = os.getenv('PASSWORD')
+    assert email and password, "EMAIL and PASSWORD must be set in .env"
+    return email, password

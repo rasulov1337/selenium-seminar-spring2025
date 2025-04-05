@@ -16,7 +16,6 @@ class LoginPage(BasePage):
         try:
             self.click(LoginPageLocators.LOGIN_BUTTON)
         except:
-            # Some error displays. I've wasted a lot of nerves and time trying to solve this crappy shit and this was the best solution I've found.
             pass
 
         self.click(self.locators.CONTINUE_WITH_PASSWORD_BUTTON)

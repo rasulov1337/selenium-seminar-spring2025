@@ -39,19 +39,13 @@ def credentials():
 def cookies(credentials, config):
         pass
 
-@pytest.mark.skip('skip')
 class TestLogin(BaseCase):
-    authorize = True
+    authorize = False
 
     def test_login(self, credentials):
         self.login_page.login(os.getenv('EMAIL'), os.getenv('PASSWORD'))
-
-        # Wait for redirect!
-        # TODO: FIX THIS
-        # WebDriverWait(self.driver, 10).until(EC.url_changes(self.main_page.url))
         WebDriverWait(self.driver, 10).until(EC.title_is('Моё обучение'))
 
-@pytest.mark.skip('skip')
 class TestLK(BaseCase):
     authorize = True
 

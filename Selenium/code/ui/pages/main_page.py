@@ -6,6 +6,7 @@ from ui.locators import basic_locators
 from ui.pages.base_page import BasePage
 from ui.pages.events_page import EventsPage
 from ui.locators.main_locators import MainPageLocators
+from ui.locators.schedule_locators import ScheduleLocators
 
 
 class MainPage(BasePage):
@@ -25,3 +26,7 @@ class MainPage(BasePage):
         search_input = self.find(MainPageLocators.SEARCH_INPUT)
         search_input.send_keys(query)
         search_input.send_keys(Keys.RETURN)
+
+    def open_info_about_lesson_at_day_of_week(self, day_of_week):
+        self.click(ScheduleLocators.day_of_week_button(day_of_week))
+        self.click(ScheduleLocators.MORE_INFO_ABOUT_CURRENT_LESSON_BUTTON)

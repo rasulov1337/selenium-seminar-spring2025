@@ -7,6 +7,7 @@ from ui.pages.login_page import LoginPage
 from ui.pages.main_page import MainPage
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from ui.locators.basic_locators import BasePageLocators
 
 import os
 from ui.locators.main_locators import MainPageLocators
@@ -60,5 +61,8 @@ class TestLK(BaseCase):
         assert self.main_page.find(SearchPageLocators.PAGE_HEADER).text == 'Результаты поиска'
 
 
-    # def test_lk2(self):
-    #     pass
+    def test_info_about_current_seminar(self):
+        self.main_page.open_info_about_lesson_at_day_of_week('ЧТ')
+        WebDriverWait(self.driver, 10).until(lambda d: len(d.window_handles) > 1)
+        self.driver.switch_to.window(self.driver.window_handles[1])
+        assert "Дата проведения" in self.driver.find_element(*BasePageLocators.BODY).text, 'Дата проведения not found on the page'
